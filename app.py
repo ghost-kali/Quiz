@@ -19,16 +19,23 @@ CORS(app)
 #def index_get():
  #   return render_template("base.html")
 
-@app.get("/predict")
+@app.post("/predict")
 def predict():
+    data = request.get_json()
+    language = data.get('Language')
+    level = data.get('Level')
+    print(language)
+    print(level)
     
-    message = get_ticket_response_pydantic(query=query)
-
-
+    # Use the language and level parameters as needed in your function
+    
+    message = get_ticket_response_pydantic(language=language)
+    
     return message
 
 
+
 if   __name__ == "__main__" : 
-    #predict()
+  
     app.run(debug=True)
   
