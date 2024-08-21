@@ -1,5 +1,4 @@
 
-
 import requests
 from bs4 import BeautifulSoup
 from openai import OpenAI
@@ -19,9 +18,6 @@ and 4 options, including the answer for the questions.
 For each question, the first option provided is the answer.
 """
 
-query = """
-Provide me 5 Questions on Python based on beginner Level Understanding
-"""
 
 
 
@@ -40,7 +36,11 @@ class TicketResolution(BaseModel):
     confidence: float = Field(description="Confidence in the resolution (0-1)")
 
 
-def get_ticket_response_pydantic(query: str):
+def get_ticket_response_pydantic(language: str):
+    query = f"""
+Provide me 5 Questions on {language} based on beginner Level Understanding
+"""
+
     completion = client.beta.chat.completions.parse(
         model=MODEL,
         messages=[
@@ -56,4 +56,4 @@ def get_ticket_response_pydantic(query: str):
 
 
 if __name__ == "__main__":
-    print(get_ticket_response_pydantic(query=query))
+    print(get_ticket_response_pydantic(language='java'))
