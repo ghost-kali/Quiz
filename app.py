@@ -29,7 +29,7 @@ def predict():
     
     # Use the language and level parameters as needed in your function
     
-    message = get_ticket_response_pydantic(language=language)
+    message = get_ticket_response_pydantic(language=language , level=level)
     
     return message
 
