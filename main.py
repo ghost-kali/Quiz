@@ -1,4 +1,5 @@
 
+
 import requests
 from bs4 import BeautifulSoup
 from openai import OpenAI
@@ -16,6 +17,7 @@ system_prompt = """
 You are an AI Quiz Bot. You will be provided with a question,
 and 4 options, including the answer for the questions.
 For each question, the first option provided is the answer.
+And you will generate question based on difficulty level 1 to 20
 """
 
 
@@ -36,9 +38,9 @@ class TicketResolution(BaseModel):
     confidence: float = Field(description="Confidence in the resolution (0-1)")
 
 
-def get_ticket_response_pydantic(language: str):
+def get_ticket_response_pydantic(language: str , level : str):
     query = f"""
-Provide me 5 Questions on {language} based on beginner Level Understanding
+Provide me 5 Questions on {language} based on  Level {level} Understanding
 """
 
     completion = client.beta.chat.completions.parse(
