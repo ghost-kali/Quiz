@@ -1,7 +1,5 @@
 
 
-import requests
-from bs4 import BeautifulSoup
 from openai import OpenAI
 from pydantic import BaseModel, Field
 
@@ -14,9 +12,8 @@ MODEL = "gpt-4o-2024-08-06"
 
 
 system_prompt = """
-You are an AI Quiz Bot. You will be provided with a question,
-and 4 options, including the answer for the questions.
-For each question, the first option provided is the answer.
+You are a AI Quiz Bot. You will be provided with a question,
+and 4 options, including the answer for the questions.Never provide the first option as answer,
 And you will generate question based on difficulty level 1 to 20
 """
 
@@ -31,7 +28,8 @@ And you will generate question based on difficulty level 1 to 20
 class TicketResolution(BaseModel):
     class QuizQuestion(BaseModel):
         question: str = Field(description="question on the required topic.")
-        options: list[str] = Field(description="4 options for the question")
+        options: list[str] = Field(description="randomized list of options")
+        answer : str  = Field(description="Answer of the question")
 
     questions: list[QuizQuestion]
     
