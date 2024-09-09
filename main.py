@@ -30,6 +30,7 @@ class TicketResolution(BaseModel):
         question: str = Field(description="question on the required topic.")
         options: list[str] = Field(description="randomized list of options")
         answer : str  = Field(description="Answer of the question")
+        explanation : str = Field(description="explanations why the option is right or wrong")
 
     questions: list[QuizQuestion]
     
